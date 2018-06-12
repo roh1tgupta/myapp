@@ -33,7 +33,7 @@ app.use('/users', function (req, res, next) {
   console.log('Request URL:', req.originalUrl)
   next()
 }, function (req, res, next) {
-  console.log('Request Type:', req.method)
+  console.log('Type of Request: ', req.method)
   next()
 })
 
