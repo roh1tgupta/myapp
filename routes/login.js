@@ -16,26 +16,19 @@ router.post('/', function(req, res) {
   console.log(req.headers["content-type"]);
   console.log(req.body);
   var obj = req.body;
-  var values = [obj.userid, obj.password, obj.age, obj.name, obj.address, obj.occupation];
-  var sql = "insert into usercred (userid, password, age, name, address, occupation) values ('"+obj.userid+"', '"+obj.password+"', '"+obj.age+"', '"+obj.name+"', '"+obj.address+"', '"+obj.occupation+"')";
+  var sql = "select * from usercred where userid = ? AND password = ?";
   console.log('sql...',sql);
-  con.connect(err => {
-    if (err) {
-      res.send('server issue');
-      throw err;
-    }
+ 
     console.log('connected to database');
-    con.query(sql, (err, result) => {
+    con.query(sql, [obj.userid, obj.password], (err, result) => {
       if (err) {
         res.send('server issue');
         throw err;
       }
       console.log('result object', result);
-      id = result.insertId;
-      console.log('number of records inserted', result.affectedRows);
-      res.send('insertd with '+id+' ');
+      res.send(result);
     });
-  })
+  
   
 });
 
