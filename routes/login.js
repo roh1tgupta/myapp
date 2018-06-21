@@ -2,13 +2,22 @@ var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
 
+/*
 var con = mysql.createConnection({
 	host: "localhost",
 	user: "root",
   password: "mysql",
   database: 'nodedb'
 });
-
+*/
+//Adding pool option Having a pool of connections for a server which has to do many queries
+var con = mysql.createPool({
+  connectionLimit: 10,
+	host: "localhost",
+	user: "root",
+  password: "mysql",
+  database: 'nodedb'
+});
 
 
 router.post('/', function(req, res) {
