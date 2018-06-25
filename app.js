@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const bodyParser = require("body-parser"); //for extracting post data
+//const bodyParser = require("body-parser"); //for extracting post data
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -23,18 +23,15 @@ app.set('view engine', 'pug');
  * Parses the text as URL encoded data (which is how browsers tend to send form data from regular forms set to POST)
  * and exposes the resulting object (containing the keys and values) on req.body
  */
-app.use(bodyParser.urlencoded({
-  extended: false
-}));
-
+//app.use(bodyParser.urlencoded({ extended: false }));
 /**bodyParser.json(options)
 * Parses the text as JSON and exposes the resulting object on req.body.
 */
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(logger('dev'));
-//app.use(express.json());
-//app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
