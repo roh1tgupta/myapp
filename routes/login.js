@@ -35,7 +35,10 @@ router.post('/', function(req, res) {
         throw err;
       }
       console.log('result object', result);
-      res.send(result);
+      if (result.length < 1)
+        res.send("invalid credentials");
+      else
+        res.send(result);
     });
   
   
