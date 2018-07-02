@@ -10,6 +10,7 @@ var con = mysql.createConnection({
 });
 
 router.post('/all', function(req, res) {
+  res.header("Access-Control-Allow-Origin", "*");
     var sql = "select * from randominfo";
     con.query(sql, (err, result) => {
       if (err) {
